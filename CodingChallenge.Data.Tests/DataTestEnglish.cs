@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using CodingChallenge.Data.Classes;
-using CodingChallenge.Data.Classes.Contracts;
-using CodingChallenge.Data.Classes.Formas;
+﻿using CodingChallenge.Data.Classes.Contracts;
 using CodingChallenge.Data.Classes.Idiomas;
+using CodingChallenge.Data.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using Assert = NUnit.Framework.Assert;
+using CodingChallenge.Data.Classes.Formas;
 
 namespace CodingChallenge.Data.Tests
 {
+    /// <summary>
+    /// Summary description for DataTestEnglish
+    /// </summary>
     [TestFixture]
-    public class DataTests
+    public class DataTestEnglish
     {
         private IGeneradorDeReporte _generadorDeReporte;
         private Idioma _idioma;
@@ -20,12 +23,12 @@ namespace CodingChallenge.Data.Tests
         [SetUp]
         public void Initialize()
         {
-            _idioma = new Castellano();
+            _idioma = new English();
             _generadorDeReporte = new GeneradorDeReporte(_idioma);
         }
 
         [TestCase]
-        public void TestResumenListaVacia()
+        public void TestResumenListaVaciaEnIngles()
         {
             //Arrange
             List<Forma> listaVacia = new List<Forma>();
@@ -34,37 +37,36 @@ namespace CodingChallenge.Data.Tests
             var resumen = _generadorDeReporte.Imprimir(listaVacia);
 
             //Assert
-            Assert.AreEqual(resumen, "<h1>Lista vacía de formas!</h1>");
+            Assert.AreEqual(resumen, "<h1>Empty list of shapes!</h1>");
         }
 
         [TestCase]
-        public void TestResumenListaConUnCuadrado()
+        public void TestResumenListaConUnCuadradoEnIngles()
         {
-            var cuadrados = new List<Forma> {new Cuadrado(5)};
-            var idioma = new Castellano();
+            var cuadrados = new List<Forma> { new Cuadrado(5) };
 
             var resumen = _generadorDeReporte.Imprimir(cuadrados);
 
-            Assert.AreEqual("<h1>Reporte de Formas</h1>1 Cuadrado | Área 25 | Perímetro 20 <br/>TOTAL:<br/>1 formas Perímetro 20 Área 25", resumen);
+            Assert.AreEqual("<h1>Shapes report</h1>1 Square | Area 25 | Perimeter 20 <br/>TOTAL:<br/>1 shapes Perimeter 20 Area 25", resumen);
         }
 
         [TestCase]
-        public void TestResumenListaConMasCuadrados()
+        public void TestResumenListaConMasCuadradosEnIngles()
         {
-            var cuadrados = new List<Forma> 
-            { 
-                new Cuadrado(5), 
+            var cuadrados = new List<Forma>
+            {
+                new Cuadrado(5),
                 new Cuadrado(1),
-                new Cuadrado(3) 
+                new Cuadrado(3)
             };
 
             var resumen = _generadorDeReporte.Imprimir(cuadrados);
 
-            Assert.AreEqual("<h1>Reporte de Formas</h1>3 Cuadrados | Área 35 | Perímetro 36 <br/>TOTAL:<br/>3 formas Perímetro 36 Área 35", resumen);
+            Assert.AreEqual("<h1>Shapes report</h1>3 Squares | Area 35 | Perimeter 36 <br/>TOTAL:<br/>3 shapes Perimeter 36 Area 35", resumen);
         }
 
         [TestCase]
-        public void TestResumenListaConMasTipos()
+        public void TestResumenListaConMasTiposEnIngles()
         {
             var formas = new List<Forma>
             {
@@ -80,7 +82,7 @@ namespace CodingChallenge.Data.Tests
             var resumen = _generadorDeReporte.Imprimir(formas);
 
             Assert.AreEqual(
-                "<h1>Reporte de Formas</h1>2 Cuadrados | Área 29 | Perímetro 28 <br/>2 Círculos | Área 13.01 | Perímetro 18.06 <br/>3 Triángulos | Área 49.64 | Perímetro 51.6 <br/>TOTAL:<br/>7 formas Perímetro 97.66 Área 91.65",
+                "<h1>Shapes report</h1>2 Squares | Area 29 | Perimeter 28 <br/>2 Circles | Area 13.01 | Perimeter 18.06 <br/>3 Triangles | Area 49.64 | Perimeter 51.6 <br/>TOTAL:<br/>7 shapes Perimeter 97.66 Area 91.65",
                 resumen);
         }
     }

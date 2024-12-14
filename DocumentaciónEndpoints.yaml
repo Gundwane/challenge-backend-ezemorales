@@ -1,0 +1,122 @@
+openapi: 3.0.1
+info:
+  title: API de Cálculos de Formas
+  description: API para calcular áreas y perímetros de diferentes formas geométricas.
+  version: 1.0.0
+
+paths:
+  # Endpoints para CuadradoController
+  /api/cuadrado/area:
+    get:
+      summary: Calcula el área de un cuadrado.
+      parameters:
+        - name: lado
+          in: query
+          required: true
+          description: El lado del cuadrado.
+          schema:
+            type: number
+            format: float
+      responses:
+        '200':
+          description: Área calculada exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  area:
+                    type: number
+                    format: float
+                    description: El área calculada del cuadrado.
+
+  /api/cuadrado/perimetro:
+    get:
+      summary: Calcula el perímetro de un cuadrado.
+      parameters:
+        - name: lado
+          in: query
+          required: true
+          description: El lado del cuadrado.
+          schema:
+            type: number
+            format: float
+      responses:
+        '200':
+          description: Perímetro calculado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  perimetro:
+                    type: number
+                    format: float
+                    description: El perímetro calculado del cuadrado.
+
+  # Endpoints para CirculoController
+  /api/circulo/area:
+    get:
+      summary: Calcula el área de un círculo.
+      parameters:
+        - name: radio
+          in: query
+          required: true
+          description: El radio del círculo.
+          schema:
+            type: number
+            format: float
+      responses:
+        '200':
+          description: Área calculada exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  area:
+                    type: number
+                    format: float
+                    description: El área calculada del círculo.
+
+  /api/circulo/perimetro:
+    get:
+      summary: Calcula el perímetro de un círculo.
+      parameters:
+        - name: radio
+          in: query
+          required: true
+          description: El radio del círculo.
+          schema:
+            type: number
+            format: float
+      responses:
+        '200':
+          description: Perímetro calculado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  perimetro:
+                    type: number
+                    format: float
+                    description: El perímetro calculado del círculo.
+
+components:
+  schemas:
+    Cuadrado:
+      type: object
+      properties:
+        lado:
+          type: number
+          format: float
+          description: El lado del cuadrado.
+
+    Circulo:
+      type: object
+      properties:
+        radio:
+          type: number
+          format: float
+          description: El radio del círculo.
